@@ -1,0 +1,4 @@
+
+# Ignore AWS CLI bundle
+aws/
+awscliv2.zip

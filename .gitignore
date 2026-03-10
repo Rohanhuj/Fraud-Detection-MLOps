@@ -1,3 +1,22 @@
+# Data
+data/
+output/
+
+# Model artifacts
+artifacts/
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Models
+*.pkl
+*.parquet
+*.csv
 
 # Ignore AWS CLI bundle
 aws/

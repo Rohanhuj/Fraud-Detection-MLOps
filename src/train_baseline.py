@@ -18,7 +18,7 @@ import mlflow.sklearn
 
 @dataclass(frozen=True)
 class Config:
-    data_dir: str = "data/features/training_features"
+    data_dir: str = os.getenv("TRAINING_FEATURES_DIR", "data/features/training_features")
     train_end_dt: str = "2025-12-20"
     test_start_dt: str = "2025-12-21"
     test_end_dt: str = "2025-12-30"

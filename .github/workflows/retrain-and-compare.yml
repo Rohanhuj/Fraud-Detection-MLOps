@@ -37,6 +37,16 @@ jobs:
           mkdir -p data/sample/training_features
           aws s3 cp s3://fraud-ml-rohan-12345/ci/training_features_sample/ data/sample/training_features/ --recursive
 
+      
+
+      - name: Download production artifacts from S3
+        run: |
+          mkdir -p artifacts
+          aws s3 cp s3://fraud-ml-rohan-12345/production_artifacts/current/model.pkl artifacts/model.pkl
+          aws s3 cp s3://fraud-ml-rohan-12345/production_artifacts/current/feature_columns.json artifacts/feature_columns.json
+          aws s3 cp s3://fraud-ml-rohan-12345/production_artifacts/current/threshold.json artifacts/threshold.json
+          aws s3 cp s3://fraud-ml-rohan-12345/production_artifacts/current/backfill_scored.parquet artifacts/backfill_scored.parquet
+            
       - name: Run retrain and compare
         run: |
           python src/retraining/retrain_and_compare.py

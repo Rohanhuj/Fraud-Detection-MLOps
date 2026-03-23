@@ -81,7 +81,6 @@ def load_parquet_dataset(root_dir: str) -> pd.DataFrame:
 
     return pd.concat(dfs, ignore_index=True)
 
-
 def time_split(df: pd.DataFrame, cfg: Config) -> Tuple[pd.DataFrame, pd.DataFrame]:
     train = df[df[cfg.dt_col] <= cfg.train_end_dt].copy()
     test = df[

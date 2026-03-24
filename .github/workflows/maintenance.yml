@@ -45,7 +45,12 @@ jobs:
           aws s3 cp s3://fraud-ml-rohan-12345/production_artifacts/current/threshold.json artifacts/threshold.json
           aws s3 cp s3://fraud-ml-rohan-12345/production_artifacts/current/backfill_scored.parquet artifacts/backfill_scored.parquet
           aws s3 cp s3://fraud-ml-rohan-12345/production_artifacts/current/reference_features.parquet artifacts/reference_features.parquet
-          
+
+      - name: Download prior monitoring state from S3
+        run: |
+          mkdir -p data/monitoring
+          aws s3 cp s3://fraud-ml-rohan-12345/monitoring/current/inference_logs.jsonl data/monitoring/inference_logs.jsonl
+          aws s3 cp s3://fraud-ml-rohan-12345/monitoring/current/daily_metrics.csv data/monitoring/daily_metrics.csv
       - name: Run maintenance orchestrator
         run: |
           bash scripts/run_maintenance.sh

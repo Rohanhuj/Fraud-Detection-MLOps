@@ -25,6 +25,10 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Run tests
+        run: |
+          python -m pytest
+
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -49,7 +53,25 @@ jobs:
             
       - name: Run retrain and compare
         run: |
-          python src/retraining/retrain_and_compare.py
+          python src/retraining/retrain_and_compare.
+
+      - name: Build Docker image
+        run: |
+          docker build -t fraud-scoring-service .
+          
+      - name: Show comparison outputs
+        if: always()
+        run: |
+          echo "===== model_comparison.csv ====="
+          cat data/monitoring/model_comparison.csv || true
+          echo
+          echo "===== model_recommendation.csv ====="
+          cat data/monitoring/model_recommendation.csv || true
+
+      - name: Promote candidate if approved
+        if: false
+        run: |
+          bash scripts/promote_candidate.sh
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

@@ -48,7 +48,7 @@ jobs:
             
       - name: Run retrain and compare
         run: |
-          python src/retraining/retrain_and_compare.
+          python src/retraining/retrain_and_compare.py
 
       - name: Build Docker image
         run: |
